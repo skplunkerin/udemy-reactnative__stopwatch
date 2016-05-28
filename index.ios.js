@@ -1,30 +1,25 @@
-// let React = require('react-native');
-// let {
-//   AppRegistry,
-//   StyleSheet,
-//   Text,
-//   View
-// } = React;
-import React from 'react'
+import React, {
+  Component
+} from 'react'
 import {
   AppRegistry,
   StyleSheet,
   Text,
   View
-} from 'react-native';
-import Button from './components/button'
+} from 'react-native'
 import Time from './components/time'
+import Button from './components/button'
 
-let StopWatch = React.createClass({
+class StopWatch extends React.Component{
   // Helper function to visually assist seeing sections of app
-  border: function(color) {
+  border(color) {
     return {
       borderColor: color,
       borderWidth: 4
     }
-  },
+  }
 
-  render: function() {
+  render() {
     return <View style={styles.container}>
       <View style={[styles.header, this.border('yellow')]}>
         <View style={[styles.timeWrapper, this.border('red')]}>
@@ -42,9 +37,9 @@ let StopWatch = React.createClass({
       </View>
     </View>
   }
-})
+}
 
-let styles = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     flex: 1, // Fill the entire screen
     alignItems: 'stretch' // Each child element to take as much space as can (height)
@@ -68,4 +63,4 @@ let styles = StyleSheet.create({
   }
 })
 
-AppRegistry.registerComponent('stopwatch', () => StopWatch);
+AppRegistry.registerComponent('stopwatch', () => StopWatch)

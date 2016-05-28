@@ -1,16 +1,18 @@
-import React from 'react'
+import React, {
+  Component
+} from 'react'
 import {
   StyleSheet,
   Text,
   View
-} from 'react-native';
+} from 'react-native'
 
-var Time = React.createClass({
-  render: function() {
+class Time extends Component{
+  render() {
     return <Text>
       00:00:00
     </Text>
   }
-})
+}
 
-module.exports = Time
+export default Time

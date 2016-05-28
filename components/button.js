@@ -1,18 +1,21 @@
-import React from 'react'
+import React, {
+  Component
+} from 'react'
 import {
   StyleSheet,
+  TouchableHighlight,
   Text,
   View
 } from 'react-native';
 
-var Button = React.createClass({
-  render: function() {
-    return <View>
+class Button extends Component {
+  render() {
+    return <TouchableHighlight onPress={()=>{}} underlayColor="gray">
       <Text>
         { this.props.text }
       </Text>
-    </View>
+    </TouchableHighlight>
   }
-})
+}
 
-module.exports = Button
+export default Button
