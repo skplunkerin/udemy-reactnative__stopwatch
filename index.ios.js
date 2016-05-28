@@ -7,10 +7,15 @@ import {
   Text,
   View
 } from 'react-native'
+import InitialState from './config/initial-state'
 import Time from './components/time'
 import Button from './components/button'
 
 class StopWatch extends React.Component{
+  constructor(props) {
+    super(props)
+    this.state = InitialState
+  }
   // Helper function to visually assist seeing sections of app
   border(color) {
     return {
@@ -26,8 +31,8 @@ class StopWatch extends React.Component{
           <Time />
         </View>
         <View style={[styles.buttonWrapper, this.border('green')]}>
-          <Button text="Start" />
-          <Button text="Lap" />
+          <Button text="Start" onPress={this._handleStartPress} />
+          <Button text="Lap" onPress={this._handleLapPress}/>
         </View>
       </View>
       <View style={[styles.footer,this.border('blue')]}>
@@ -36,6 +41,12 @@ class StopWatch extends React.Component{
         </Text>
       </View>
     </View>
+  }
+  _handleStartPress() {
+    console.log('start press...pressed')
+  }
+  _handleLapPress() {
+    console.log('lap press...pressed')
   }
 }
 

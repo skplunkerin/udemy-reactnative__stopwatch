@@ -10,7 +10,7 @@ import {
 
 class Button extends Component {
   render() {
-    return <TouchableHighlight onPress={()=>{}} underlayColor="gray">
+    return <TouchableHighlight onPress={this.props.onPress} underlayColor="gray">
       <Text>
         { this.props.text }
       </Text>
