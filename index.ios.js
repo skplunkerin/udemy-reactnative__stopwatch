@@ -7,14 +7,15 @@ import {
   Text,
   View
 } from 'react-native'
-import InitialState from './config/initial-state'
+import initialState from './config/initial-state'
 import Time from './components/time'
 import Button from './components/button'
 
 class StopWatch extends React.Component{
   constructor(props) {
     super(props)
-    this.state = InitialState
+    this.state = initialState()
+    console.log('this.state:', this.state)
   }
   // Helper function to visually assist seeing sections of app
   border(color) {

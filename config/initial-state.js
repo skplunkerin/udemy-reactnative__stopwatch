@@ -1,3 +1,5 @@
-export.modules = {
-  timeElapsed: null
+export default function() {
+  return {
+    timeElapsed: null
+  }
 }
