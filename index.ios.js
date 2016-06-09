@@ -7,12 +7,13 @@ import {
   Text,
   View
 } from 'react-native'
+import Styles from './config/styles'
 import formatTime from 'minutes-seconds-milliseconds'
 import initialState from './config/initial-state'
 import Time from './components/time'
 import Button from './components/button'
 
-class StopWatch extends React.Component{
+class StopWatch extends Component {
   constructor(props) {
     super(props)
     this._handleStartPress = this._handleStartPress.bind(this)
@@ -87,52 +88,6 @@ class StopWatch extends React.Component{
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1, // Fill the entire screen
-    alignItems: 'stretch' // Each child element to take as much space as can (height)
-  },
-  header: { // Yellow
-    flex: 1
-  },
-  footer: { // Blue
-    flex: 1
-  },
-  timeWrapper: { // Red
-    flex: 5,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  buttonWrapper: { // Green
-    flex: 3,
-    flexDirection: 'row',
-    justifyContent: 'space-around', // equally distribute children in space given
-    alignItems: 'center' // equally distribute children in space given
-  },
-  timer: {
-    fontSize: 60
-  },
-  button: {
-    width: 100,
-    height: 100,
-    borderWidth: 2,
-    borderRadius: 50,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  startButton: {
-    borderColor: '#00CC00'
-  },
-  stopButton: {
-    borderColor: '#CC0000'
-  },
-  lap: {
-    justifyContent: 'space-around',
-    flexDirection: 'row'
-  },
-  lapText: {
-    fontSize: 30
-  }
-})
+const styles = Styles()
 
 AppRegistry.registerComponent('stopwatch', () => StopWatch)
