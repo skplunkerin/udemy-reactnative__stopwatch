@@ -7,6 +7,7 @@ import {
   Text,
   View
 } from 'react-native'
+import formatTime from 'minutes-seconds-milliseconds'
 import initialState from './config/initial-state'
 import Time from './components/time'
 import Button from './components/button'
@@ -14,6 +15,8 @@ import Button from './components/button'
 class StopWatch extends React.Component{
   constructor(props) {
     super(props)
+    this._handleStartPress = this._handleStartPress.bind(this)
+    this._handleLapPress = this._handleLapPress.bind(this)
     this.state = initialState()
     console.log('this.state:', this.state)
   }
@@ -27,16 +30,16 @@ class StopWatch extends React.Component{
 
   render() {
     return <View style={styles.container}>
-      <View style={[styles.header, this.border('yellow')]}>
-        <View style={[styles.timeWrapper, this.border('red')]}>
-          <Time />
+      <View style={[styles.header]}>
+        <View style={[styles.timeWrapper]}>
+          <Time time={formatTime(this.state.timeElapsed)} style={styles.timer} />
         </View>
-        <View style={[styles.buttonWrapper, this.border('green')]}>
-          <Button text="Start" onPress={this._handleStartPress} />
-          <Button text="Lap" onPress={this._handleLapPress}/>
+        <View style={[styles.buttonWrapper]}>
+          <Button style={[styles.button, styles.lapButton]} text="Start" onPress={this._handleStartPress} />
+          <Button style={styles.button} text="Lap" onPress={this._handleLapPress}/>
         </View>
       </View>
-      <View style={[styles.footer,this.border('blue')]}>
+      <View style={[styles.footer]}>
         <Text>
           TODO: list of laps
         </Text>
@@ -45,6 +48,15 @@ class StopWatch extends React.Component{
   }
   _handleStartPress() {
     console.log('start press...pressed')
+    let startTime = new Date()
+
+    // trigger this function
+    setInterval( () => {
+      // Update state with new value
+      this.setState({
+        timeElapsed: new Date() - startTime
+      })
+    }, 30 )
   }
   _handleLapPress() {
     console.log('lap press...pressed')
@@ -72,6 +84,20 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around', // equally distribute children in space given
     alignItems: 'center' // equally distribute children in space given
+  },
+  timer: {
+    fontSize: 60
+  },
+  button: {
+    width: 100,
+    height: 100,
+    borderWidth: 2,
+    borderRadius: 50,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  lapButton: {
+    borderColor: '#00CC00'
   }
 })
 

@@ -9,8 +9,8 @@ import {
 
 class Time extends Component{
   render() {
-    return <Text>
-      00:00:00
+    return <Text style={this.props.style}>
+      {this.props.time}
     </Text>
   }
 }
