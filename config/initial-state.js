@@ -1,5 +1,9 @@
 export default function() {
   return {
-    timeElapsed: null
+    startTime: null,
+    timeElapsed: null,
+    running: false,
+    startText: 'Start',
+    laps: []
   }
 }

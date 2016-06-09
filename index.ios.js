@@ -29,37 +29,61 @@ class StopWatch extends React.Component{
   }
 
   render() {
+    let startStyle = (this.state.running) ? styles.stopButton : styles.startButton
     return <View style={styles.container}>
       <View style={[styles.header]}>
         <View style={[styles.timeWrapper]}>
           <Time time={formatTime(this.state.timeElapsed)} style={styles.timer} />
         </View>
         <View style={[styles.buttonWrapper]}>
-          <Button style={[styles.button, styles.lapButton]} text="Start" onPress={this._handleStartPress} />
+          <Button style={[styles.button, startStyle]} text={this.state.startText} onPress={this._handleStartPress} />
           <Button style={styles.button} text="Lap" onPress={this._handleLapPress}/>
         </View>
       </View>
       <View style={[styles.footer]}>
-        <Text>
-          TODO: list of laps
-        </Text>
+        <View>
+          {this.state.laps.map((time, index) => {
+            return <View key={index} style={styles.lap}>
+              <Text style={styles.lapText}>
+                Lap #{index + 1}
+              </Text>
+              <Text style={styles.lapText}>
+                {formatTime(time)}
+              </Text>
+            </View>
+          })}
+        </View>
       </View>
     </View>
   }
   _handleStartPress() {
     console.log('start press...pressed')
-    let startTime = new Date()
+    if(this.state.running){
+      clearInterval(this.interval)
+      this.setState({
+        running: false,
+        startText: 'Start'
+      })
+      return
+    }
 
-    // trigger this function
-    setInterval( () => {
+    this.setState({startTime: new Date()})
+    this.interval = setInterval( () => {
       // Update state with new value
       this.setState({
-        timeElapsed: new Date() - startTime
+        timeElapsed: new Date() - this.state.startTime,
+        running: true,
+        startText: 'Stop'
       })
     }, 30 )
   }
   _handleLapPress() {
     console.log('lap press...pressed')
+    let lap = this.state.timeElapsed
+    this.setState({
+      startTime: new Date(),
+      laps: this.state.laps.concat([lap])
+    })
   }
 }
 
@@ -96,8 +120,18 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   },
-  lapButton: {
+  startButton: {
     borderColor: '#00CC00'
+  },
+  stopButton: {
+    borderColor: '#CC0000'
+  },
+  lap: {
+    justifyContent: 'space-around',
+    flexDirection: 'row'
+  },
+  lapText: {
+    fontSize: 30
   }
 })
 
